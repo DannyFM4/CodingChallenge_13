@@ -23,6 +23,31 @@ function createEmployeeCard(name, position) { // creates a function
     employeeCard.appendChild(removeButton); // adds the button to the page
     employeeContainer.appendChild(employeeCard); // adds the card to the page
 
+
+    // Task 5: Inline Editing of Employee Details
+    
+    editButton = document.createElement("button"); // creates a new button
+    editButton.textContent = "Edit"; // makes the button have text in it
+    editButton.setAttribute("id", "edtBtn"); // gives the edit button an id
+
+    editButton.addEventListener("click", () => { // adds an event listener for the edit button
+        employeeCard.innerHTML = `<input type="text" id="edit" value="" />`; // when edit button is pressed, input field opens
+        saveButton = document.createElement("button"); // creates button
+        saveButton.setAttribute("id", "saveBtn"); // gives save button id
+        saveButton.textContent = "Save"; // text content on the save button
+        employeeCard.appendChild(saveButton); // when edit button is hit save button appears next to input field
+
+        saveButton.addEventListener("click", () => { 
+            const newInfo = document.getElementById("edit"); // grabs info by id
+            employeeCard.appendChild(newInfo); // changes the info that was inputted
+
+        });
+        
+    });
+
+    employeeCard.appendChild(editButton); // insets the edit button
+
+
 };
 
 // Task 2 - Test Cases
