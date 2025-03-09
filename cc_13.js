@@ -5,7 +5,7 @@ function createEmployeeCard(name, position) { // creates a function
     const employeeContainer = document.getElementById("employeeContainer"); // grab and element by heir ID
 
     employeeCard.setAttribute("class", "employeeCard"); // creates an attribute
-    employeeCard.innerHTML = `<h3>${name}</h3><p>${position}</p>`; // puts text inside the div
+    employeeCard.innerHTML = `<h3 class="employeeName">${name}</h3><p class="employeePosition">${position}</p>`; // puts text inside the div
 
     removeButton = document.createElement("button"); // creates a new button
     removeButton.textContent = "Remove"; // makes the button have text in it
@@ -30,25 +30,46 @@ function createEmployeeCard(name, position) { // creates a function
     editButton.textContent = "Edit"; // makes the button have text in it
     editButton.setAttribute("id", "edtBtn"); // gives the edit button an id
 
-    editButton.addEventListener("click", () => { // adds an event listener for the edit button
-        employeeCard.innerHTML = `<input type="text" id="edit" value="" />`; // when edit button is pressed, input field opens
-        saveButton = document.createElement("button"); // creates button
-        saveButton.setAttribute("id", "saveBtn"); // gives save button id
+    function editEmployees() { // creates function
+        // assigns variable to classes
+        const empName = employeeCard.querySelector(".empName");
+        const empPosition = employeeCard.querySelector(".empPosition");
+
+        // formats the cards
+        employeeCard.innerHTML = `<input type="text" class="nameEdit" value="${empName}"><input type="text" class="positionEdit" value="${empPosition}">`;
+
+        // creates the save button
+        const saveButton = document.createElement("button"); // creates button
         saveButton.textContent = "Save"; // text content on the save button
-        employeeCard.appendChild(saveButton); // when edit button is hit save button appears next to input field
 
+        // adds an event listener for click
         saveButton.addEventListener("click", () => { 
-            const newInfo = document.getElementById("edit"); // grabs info by id
-            employeeCard.appendChild(newInfo); // changes the info that was inputted
+            // grabs info by class
+            const newName = document.querySelector(".nameEdit"); 
+            const newPosition = document.querySelector("positionEdit")
 
+            // edits the info
+            employeeCard.innerHTML = `<h3>${newName}</h3><p>${newPosition}</p>`;
+
+            // keeps the buttons around
+            employeeCard.appendChild(removeButton);
+            employeeCard.appendChild(editButton);
         });
-        
-    });
+        // inputs the save buttons
+        employeeCard.appendChild(saveButton);
+    };
 
-    employeeCard.appendChild(editButton); // insets the edit button
+    // runs function on click
+    editButton.addEventListener("click", editEmployees);
 
+    // inputs buttons
+    employeeCard.appendChild(removeButton);
+    employeeCard.appendChild(editButton);
 
+    employeeContainer.appendChild(employeeCard);
 };
+
+
 
 // Task 2 - Test Cases
 createEmployeeCard("Sean Payton", "Head Coach");
