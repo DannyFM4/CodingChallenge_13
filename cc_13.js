@@ -24,3 +24,15 @@ function createEmployeeCard(name, position) { // creates a function
 createEmployeeCard("Sean Payton", "Head Coach");
 createEmployeeCard("Joe Schoen", "General Manager");
 createEmployeeCard("Kirk Herbstreit", "Lead Analyst");
+
+
+// Task 3: Converting NodeLists to Arrays for Bulk Updates
+
+// creates node list using a query selector, then makes node list an array
+const employeeNodeList = document.querySelectorAll(".employeeCard");
+const employeeArray = Array.from(employeeNodeList);
+
+employeeArray.forEach((card) => { // goes through each item in the array
+    card.style.backgroundColor = "aquamarine"; // changes background color of each card
+    card.style.border = "5px black solid"; // adds a solid, black border to each card
+});
