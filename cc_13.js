@@ -7,12 +7,17 @@ function createEmployeeCard(name, position) { // creates a function
     employeeCard.setAttribute("class", "employeeCard"); // creates an attribute
     employeeCard.innerHTML = `<h3>${name}</h3><p>${position}</p>`; // puts text inside the div
 
-    removeButton = document.createElement("button"); // cates a new button
+    removeButton = document.createElement("button"); // creates a new button
     removeButton.textContent = "Remove"; // makes the button have text in it
 
+    // Task 4: Implementing Removal of Employee Cards with Event Bubbling
     removeButton.addEventListener("click", (event) => { // adds an event listener to the button
         employeeContainer.removeChild(employeeCard); // removes the card if the button is clicked
-        event.stopPropagation();
+        event.stopPropagation(); // makes sure remove button only delete what it is supposed to
+    });
+
+    employeeCard.addEventListener("click", () => { // adds an event listener
+        console.log(`${name} - Card Clicked`); // when an employee card is clicked, this message is logged in the console
     });
 
     employeeCard.appendChild(removeButton); // adds the button to the page
